@@ -9,9 +9,9 @@
 
 ### Like Woah. 
 
-```
+<code class="clojure">
 ((comp (partial apply +) (partial map (partial * 3))) [1 2 3])
-```
+</code>
 
 Let's see what happens if I use a language that isn't supported by klipse, like haskell! 
 
@@ -43,6 +43,5 @@ my slack posts:
 
 Let's try another python one.
 
-<python>
-1 + 2
-</python>
+<code class="python">1 + 2
+</code>
