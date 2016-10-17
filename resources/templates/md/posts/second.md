@@ -10,7 +10,13 @@
 ### Like Woah. 
 
 ```
-(print "Foo, Bar.")
+((comp (partial apply +) (partial map (partial * 3))) [1 2 3])
+```
+
+Let's see what happens if I use a language that isn't supported by klipse, like haskell! 
+
+```
+sum . map (*3) $ [1, 2, 3]
 ```
 
 some stuff happened
