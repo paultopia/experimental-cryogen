@@ -9,7 +9,7 @@ This is just a post to experiment with klipse and making it work with cryogen ma
 the following is done with markdown fenced block: 
 
 ```clojure
-(take 10 (map inc [range]))
+(take 10 (map inc (range)))
 ```
 
 the following is done with raw html code tags:
