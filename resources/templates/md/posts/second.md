@@ -37,8 +37,12 @@ my slack posts:
 
 > oooh, actually, it looks like highlight.js automatically adds classes like "hljs clojure" to code blocks, so it might be as easy as just configuring klipse to look for that.
 
-> (although with multiple languages, I'm not sure that would work. does `klipse_settings.selector` take an array of css selectors?
+> (although with multiple languages, I'm not sure that would work. does klipse_settings.selector take an array of css selectors?
 
 > interesting.  using class selectors doesn't seem to work, but selecting code elements does...
 
->and a quote appeared
+Let's try another python one.
+
+<python>
+1 + 2
+</python>
