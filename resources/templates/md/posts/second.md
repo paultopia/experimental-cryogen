@@ -1,6 +1,6 @@
 {:title "Experimenting"
  :layout :post
- :date "2016-10-17"
+ :date "2016-10-16"
  :executable true
  :tags  ["meta"]}
 
