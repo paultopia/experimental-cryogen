@@ -1,6 +1,7 @@
 {:title "A Post"
  :layout :post
  :date "2016-01-01"
+ :executable true
  :tags  ["kitty" "meow" "not fetch"]}
 
 # An
