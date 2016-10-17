@@ -1,7 +1,7 @@
-{:site-title         "My Awesome Blog"
- :author             "Bob Bobbert"
- :description        "This blog is awesome"
- :site-url           "http://blogawesome.com/"
+{:site-title         "Experiments in Cryogen"
+ :author             "Paul Gowder"
+ :description        "ignore this for now"
+ :site-url           "http://gowder.io"
  :post-root          "posts"
  :page-root          "pages"
  :post-root-uri      "posts-output"
@@ -15,7 +15,7 @@
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
  :sass-dest          nil
- :theme              "blue"
+ :theme              "nucleus"
  :resources          ["img"]
  :keep-files         [".git"]
  :disqus?            false
