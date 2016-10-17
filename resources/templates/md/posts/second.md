@@ -1,14 +1,18 @@
-{:title "A Post"
+{:title "Experimenting"
  :layout :post
- :date "2016-01-01"
+ :date "2016-10-17"
  :executable true
- :tags  ["kitty" "meow" "not fetch"]}
+ :tags  ["meta"]}
 
-# An
+This is just a post to experiment with klipse and making it work with cryogen markdown passing. 
 
-## Experiment
+the following is done with markdown tags: 
 
-### Like Woah. 
+```clojure
+(take 10 (map inc [range]))
+```
+
+the following is done with raw html code tags:
 
 <code class="clojure">
 ((comp (partial apply +) (partial map (partial * 3))) [1 2 3])
