@@ -1,6 +1,6 @@
 {:title "Cryogen + Github pages + Klipse"
  :layout :post
- :date "2016-10-16"
+ :date "2016-10-17"
  :executable true
  :tags  ["meta" "clojure" "clojurescript"]}
 
