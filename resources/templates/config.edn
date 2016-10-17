@@ -1,14 +1,13 @@
-{:site-title         "Experiments in Cryogen"
+{:site-title         "Experiments in Tech Blogging (!!)"
  :author             "Paul Gowder"
- :description        "ignore this for now"
- :site-url           "http://gowder.io"
+ :description        "let's see, eh?"
+ :site-url           "http://paultopia.github.io"
  :post-root          "posts"
  :page-root          "pages"
  :post-root-uri      "posts-output"
  :page-root-uri      "pages-output"
  :tag-root-uri       "tags-output"
  :author-root-uri    "authors-output"
- :blog-prefix        "/blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
  :recent-posts       3
