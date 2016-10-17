@@ -15,9 +15,17 @@
 
 Let's see what happens if I use a language that isn't supported by klipse, like haskell! 
 
-<pre class="haskell">
+```
+plength :: [a] -> Int
+plength [] = 0
+plength (x:xs) = 1 + plength xs
+```
+
+it's really bad at identifying haskell.
+
+```
 sum . map (*3) $ [1, 2, 3]
-</pre>
+```
 
 I wonder if I can use python? 
 
@@ -43,5 +51,11 @@ my slack posts:
 
 Let's try another python one.
 
-<code class="python">1 + 2
+<code class="python">print [x.upper() for x in ["foo", "bar"]]
 </code>
+
+> ok, the solution is apparently to just put straight html in the markdown and give it a code tag with a klipse class, rather than using the markdown triple-backquote syntax
+
+Now really all I need to add is the live-code tag that puts this stuff in only when I need it.  
+
+Actually, I should have a live-clojure, live-python, etc., to minimize loading. 
