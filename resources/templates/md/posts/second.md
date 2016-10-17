@@ -15,9 +15,9 @@
 
 Let's see what happens if I use a language that isn't supported by klipse, like haskell! 
 
-```
+<pre class="haskell">
 sum . map (*3) $ [1, 2, 3]
-```
+</pre>
 
 some stuff happened
 

@@ -91,5 +91,14 @@
 </script>
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 
+<script>
+ // hack to get highlight.js highlighting for code blocks that aren't klipse-able
+ $(document).ready(function() {
+     $('pre.haskell').each(function(i, block) {
+         hljs.highlightBlock(block);
+     });
+ });
+</script>
+
 </body>
 </html>
