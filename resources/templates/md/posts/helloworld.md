@@ -47,7 +47,7 @@ A few points to note there:
 - Because Python is still an unofficial part of Klipse, this selector isn't actually documented yet, but it's in there and I'll prove it: 
 
 ```python
-print "".join(map(lambda x: "Hello" + x, ["ma baby", "ma honey", "ma ragtop World!"]))
+print ", ".join(map(lambda x: "Hello " + x, ["my baby", "my honey", "my ragtop World!"]))
 ```
 
 See?
