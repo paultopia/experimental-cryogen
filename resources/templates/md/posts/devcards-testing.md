@@ -77,13 +77,16 @@ Unlike normal CLJS libraries, you don't specify a HTML element in your cards pag
 
 That namespace point is important and easy to miss. While you don't have to explicitly render Devcards, you do have to have the namespace a card is defined in somewhere in the dependency tree of your main namespace ([main namespace mainly used for no-optimization compilation](https://github.com/clojure/clojurescript/wiki/Compiler-Options#main)). So my dependency tree looks something like this: 
 
-<pre>
-statspop.dev  (the main namespace specified in project.clj) 
+```
+statspop.dev  (the main namespace specified in project.clj)
+|
  -- requires statspop.core
+ |
   ---- requires all the application code namespaces
  -- requires statspop.core-test
+ |
   ---- requires all the individual test namespaces (where Devcards cards and tests are defined)
-</pre>
+```
 
 
 Speaking of rendering, the Devcards docs suggest setting up your main app rendering with a conditional, so that it only renders if the node it aims at appears. E.g., from the core.cljs one of my projects:
