@@ -35,8 +35,7 @@ So how do we do it?
 ```
   :figwheel {:http-server-root "public"
              :nrepl-port 7002
-             :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
-             :css-dirs ["public/css"]}
+             :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]}
 ```
 
 *CLJS builds giving source paths, e.g.:*
@@ -45,13 +44,7 @@ So how do we do it?
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "env/dev/cljs"]  ; needed
                         :compiler
-                        {:main "statspop.dev"
-                         :output-to "public/js/app.js"
-                         :output-dir "public/js/out"
-                         :asset-path   "js/out"
-                         :source-map true
-                         :optimizations :none
-                         :pretty-print  true}}
+                        {:main "blahblahblah.dev" ; blah blah etc.}}
 
 ```
 
@@ -62,7 +55,7 @@ So how do we do it?
 
 ```
 
-5.  and a dev profile calling in piggieback and figwheel-sidecar
+*and a dev profile calling in piggieback and figwheel-sidecar*
 
 ```
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.4-5"]
