@@ -1,6 +1,6 @@
 {:title "Using macros to get data into Clojurescript front-end pages"
  :layout :post
- :date "2016-12-02"
+ :date "2016-12-04"
  :executable false
  :tags  ["clojure" "clojurescript"]}
  
