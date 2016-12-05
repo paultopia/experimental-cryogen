@@ -65,11 +65,11 @@ And then we have a macro.clj:
             [selmer.parser :refer [render-file render]]
             [hickory.core :refer [parse-fragment as-hiccup]]))
 
-(defn buildside-get-data [jsonfile]
+(defn get-data [jsonfile]
   (parse-string (slurp jsonfile) true))
 
 (defmacro from-template [template jsonfile]
-  (first (map as-hiccup (parse-fragment (render (slurp template) (buildside-get-data jsonfile))))))
+  (first (map as-hiccup (parse-fragment (render (slurp template) (get-data jsonfile))))))
 ```
 
 And finally, we have some the Clojurescript that consumes it, core.cljs: 
