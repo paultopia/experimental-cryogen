@@ -1,4 +1,4 @@
-{:title "Basic Transducers"
+{:title "Transducers for total beginners"
  :layout :post
  :date "2016-12-5"
  :executable true
@@ -119,7 +119,7 @@ For future reference, here's the list of the built-in higher-order sequence func
 
 Christophe Grand has also written [tranducerific support for more core functions](https://github.com/cgrand/xforms). Right now they seem a little hard to understand (especially x/reduce!!) but reading the code is interesting...
 
-Alto, [this is a nice SO](http://stackoverflow.com/questions/26317325/can-someone-explain-clojure-transducers-to-me-in-simple-terms).
+Also, [this is a nice SO](http://stackoverflow.com/questions/26317325/can-someone-explain-clojure-transducers-to-me-in-simple-terms).
 
 
 
