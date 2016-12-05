@@ -46,19 +46,19 @@ Why are these different?  Because ordinary function composition runs backwards, 
 ```
 
 ```clojure
-(println (transduce xf + (range 10)))
+(transduce xf + (range 10))
 ```
 
 ```clojure
-(println (reduce + (range 10)))
+(reduce + (range 10))
 ```
 
 ```clojure
-(println (transduce xf conj [] (range 10)))
+(transduce xf conj [] (range 10))
 ```
 
 ```clojure
-(println (reduce conj [] (range 10)))
+(reduce conj [] (range 10))
 ```
 
 `eduction` seems to basically just mean "create a lazy sequence from applying the transducer to the collection" 
