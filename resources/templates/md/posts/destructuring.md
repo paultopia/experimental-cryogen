@@ -152,7 +152,7 @@ You can also go a little crazy with the nesting and get maps inside vectors, and
 
 ```clojure
 (def ridiculous ["foo" {:bar "baz" :bat [1 2 3]}])
-(let [[_ {[_ mynum _] :bat}] ridiculous] mynum)
+(let [[_ {[_ mynum _] :bat}] ridiculous] (str mynum))
 ```
 
 See what I did there?  I took the second item in the vector, which was a map, grabbed the thing attached to `:bat`, which was a vector, and then grabbed the second item in it.
