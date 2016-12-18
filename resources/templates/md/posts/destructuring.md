@@ -178,8 +178,8 @@ The closest equivalent I can come up with to this in Clojure puts the variables 
 
 ```clojure
 (def v [0 1])
-(def v (let [[a b] v]] [b a]))
-(print v)
+(def v (let [[a b] v] [b a]))
+(identity v)
 ```
 
 or as a map, which can do the swapping right in the destructuring statement:
@@ -187,7 +187,7 @@ or as a map, which can do the swapping right in the destructuring statement:
 ```clojure
 (def ab {:a 0 :b 1})
 (def ab (let [{a :b b :a} ab] {:a a :b b}))
-(print ab)
+(identity ab)
 ```
 
 Though I'm not sure if either technically respects the "no temp variables" rule since they do create temporary bindings in the let statements.  But both versions have the same general form of "unpack the first two variables, swap them without storing either one in a third."  And there's probably a more elegant way to do it. (Something to try at home: write a macro to do this to two variables on their own.)
