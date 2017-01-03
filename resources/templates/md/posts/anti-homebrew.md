@@ -56,7 +56,7 @@ Ok, what's this?  First of all, I don't even remember installing Java via brew, 
 
 Looking at [the noted github issue](https://github.com/caskroom/homebrew-cask/issues/21913), there is, no explanation of this change. But there is new information: apparently migrating your casks to the new location, as suggested by the warning, isn't so easy as all that. If you installed your packages *after* a commit that was apparently merged on May 31, 2016, then you're ok, you can just move the directory the casks are located in.  But if you installed anything before that, it's symlinked, and you have to manually uninstall and reinstall.
 
-So apparently it wants me to delete the entire (200mb-ish) JDK and re-install it because the maintainers randomly to change the location where packages were installed (*multiple times, recently*, if you count the symlink change) and aren't willing to provide an automated migration solution, or set some option in an environment variable that will probably get deprecated (or just flat-out dropped) in the next version? Which, remember, you can't choose not to use, because now it force auto-updates. 
+So apparently it wants me to delete the entire (200mb-ish) JDK and re-install it because the maintainers decided to change the location where packages were installed (*multiple times, recently*, if you count the symlink change) and aren't willing to provide an automated migration solution, or set some option in an environment variable that will probably get deprecated (or just flat-out dropped) in the next version? Which, remember, you can't choose not to use, because now it force auto-updates. 
  
 ## Adding privacy violations to security violations.
 
