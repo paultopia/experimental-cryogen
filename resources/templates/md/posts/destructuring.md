@@ -128,8 +128,9 @@ Note how this works even though the numbers aren't collected into a vector.  Inc
 While we're at it, let's look at nested data structures. First, we'll use the previous technique to make a vector with sequences in them. And, actually, let's learn a new technique in the process: you can also use `:as` in any destructuring operation to bind the entire destructured data structure to a name.  So:
 
 ```clojure
-(let [[v1 v2 & the-rest :as everything] (range 10)]
-[v1 v2 the-rest everything])
+(def nested (let [[v1 v2 & the-rest :as everything] (range 10)]
+  [v1 v2 the-rest everything]))
+nested
 ```
 
 Now let's grab... say... the 1 from the first two numbers, nothing from the first sequence and the 2 from the second sequence. 
