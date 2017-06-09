@@ -3,6 +3,12 @@
  :date "2017-04-05"
  :executable false
  :tags  ["clojurescript" "clojure" "javascript" "react" "reagent" "web"]}
+
+**EDIT:** 
+
+I never finished this post, but actually managed to make a different strategy work. Post to be revised later, but example working code in [this repo](https://github.com/paultopia/datasheetexperiment).
+
+<hr>
  
 Today's quest: I have a bunch of [reagent](https://reagent-project.github.io/) projects that involve displaying tabular data. Reagent, for those not in the cool kid club, is a clojurescript wrapper for React. I just learned, thanks to HN, about this awesome-looking new React library (do we call them libraries in react-land?  or just components?) to display a spreadsheet-like interface, [https://github.com/nadbm/react-datasheet](react-datasheet).
 
