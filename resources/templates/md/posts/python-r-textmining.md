@@ -28,6 +28,10 @@ Work in progress.
 
 - [wordcloud](https://github.com/amueller/word_cloud) --- word clouds are always fun.  Kinda useless, but fun.
 
+- [Pattern](http://www.clips.ua.ac.be/pattern) --- a library that combines web-scraping with some standard NLP tools.
+
+- [CoreNLP Wrappers](https://stanfordnlp.github.io/CoreNLP/other-languages.html#python) Python wrappers for Stanford Core NLP.
+
 ## Publications, Tutorials, etc.
 
 (to be added)
