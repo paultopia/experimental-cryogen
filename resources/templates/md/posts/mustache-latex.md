@@ -52,7 +52,7 @@ Here's a more robust fix.  Instead of `Mustache.escape = text => text;` in the a
 ```javascript
 var matches = new Map([["\\", "textbackslash"],
                        ["~","textasciitilde"],
-	                   ["^","textasciicircum"]]);
+                       ["^","textasciicircum"]]);
 
 var messytext = "I shouldn't be escaped / \n I should be: $ \n and I should be a special LaTeX command: ^"
 
