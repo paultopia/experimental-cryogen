@@ -47,20 +47,19 @@ latex(input).pipe(output);
 
 That will just get rid of HTML encoding.  But you're not quite done yet, if you want to use LaTeX.  What if the text you want to put into the template itself has LaTeX reserved characters?
 
-Here's a more robust fix.  Instead of `Mustache.escape = text => text;` in the above, you can use this:
+Here's a more robust fix.  Instead of `Mustache.escape = text => text;` in the above, you can set the escape function to something that escapes LaTeX reserved characters. I've defined a `latexEscaper` below that can be dropped right in.:
 
 ```javascript
-var matches = {"\\": "textbackslash", 
-              "~":"textasciitilde", 
-              "^":"textasciicircum"};
+var matches = new Map([["\\", "textbackslash"],
+                       ["~","textasciitilde"],
+	                   ["^","textasciicircum"]]);
+
+var messytext = "I shouldn't be escaped / \n I should be: $ \n and I should be a special LaTeX command: ^"
 
 function latexEscaper(text){
-	return text
-		.replace(/[\\~\^]/g, match => "\\" +  matches[match])
-		.replace(/[%&$#_{}]/g, m => "\\" + m);
-}
-
-Mustache.escape = latexEscaper;
+		return text.replace(/[\\~\^%&$#_{}]/g, 
+                    match => "\\" +  (matches.get(match) || match));}
+		console.log(latexEscaper(messytext));
 ```
 
 And then your template should produce valid LaTeX, or at least as valid as LaTeX ever is...
