@@ -47,8 +47,10 @@ latex(input).pipe(output);
 
 That will just get rid of HTML encoding.  There are fancier things you can do.  For example, if you want to escape LaTeX reserved characters yourself, this one-liner handles 7 of 10: 
 
-` Mustache.escape = text => text.replace(/[%&$#_{}]/g, m => "\\" + m);`
+```
+Mustache.escape = text => text.replace(/[%&$#_{}]/g, m => "\\" + m);
+```
 
-Note, however, that the function above doesn't handle `~`, `^`, or `\`, which require special control sequences. Of course, it's easy to add logic to do that if you plan to use those characters, but it won't be a pretty one-liner anymore, alas.
+Note, however, that the function above doesn't handle ~, ^, or \, which require special control sequences. Of course, it's easy to add logic to do that if you plan to use those characters, but it won't be a pretty one-liner anymore, alas.
 
 Now, if you'll excuse me, I think I go need to do a PR to turn this from undocumented into documented...
