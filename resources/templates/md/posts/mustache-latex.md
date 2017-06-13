@@ -1,7 +1,7 @@
 {:title "How to Make Mustache.js Templates Play Nice with LaTeX"
  :layout :post
  :date "2017-06-11"
- :executable false
+ :executable true
  :tags  ["mustache" "templates" "latex" "javascript"]}
 
 I'm trying to achieve the holy grail and have a LaTeX cv that gets automatically updated from JSON, like [Jsonresume](https://jsonresume.org/), only with my own custom fields appropriate for someone who does the wild variety of things I do. I'm terrible at LaTeX, but there are plenty of templates floating around, and there's a great new project, [Latexresu.me](https://latexresu.me/), that appeared on show HN recently---it's awesome, try it---and I just used it to shamelessly steal some stubs to build from.
