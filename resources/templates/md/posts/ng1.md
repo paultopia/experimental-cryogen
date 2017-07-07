@@ -90,7 +90,10 @@ for j = 1 to m:
     perform an update using just the jth training example (for each i) 
 ```
 
-that update is just  ```$$\theta_i : = \theta_i - \alpha (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$ ```
+that update is just  
+```nohighlight 
+ $$\theta_i : = \theta_i - \alpha (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$
+```
 
 in practice, this tends to go rather faster for large datasets. It doesn't actually converge exactly to the global minimum, but they tend to wander close to it. 
 
@@ -114,12 +117,15 @@ Then design matrix multiplied by theta vector is just the hypotheses for a given
 
 Anyway, classic closed form: 
 
-```
+```nohighlight 
 $$\theta = (X^TX)^{-1}X^T\overrightarrow{y}$$
 ```
 
 This is our old friend OLS. Hello OLS. You're also [enjoyably easy to implement in clojurescript](https://github.com/paultopia/browser-stats/blob/master/statspop/src/statspop/math/regression.cljs#L15).
 
-Note at the end of the lecture in response to a student question: usually, if `$X^Tx$` isn't invertible, it's because you've got dependent features in there, like repeating the same feature twice or something. (or linear combination, I take it? Standard OLS blow-up...)
+Note at the end of the lecture in response to a student question: usually, if `$X^TX$` isn't invertible, it's because you've got dependent features in there, like repeating the same feature twice or something. (or linear combination, I take it? Standard OLS blow-up...)
 
 that's it!
+
+
+(note to self for future: to get mathml and highlight.js and this markdown parser to play nicely together, math has to be in code blocks, but those code blocks have to be either inline or they have to get the `nohighlight` class; in the latter case there apparently needs to be whitespace after the class declaration on the code block or for some mysterious reason it'll get a bunch of other classes instead, god only knows why.)
