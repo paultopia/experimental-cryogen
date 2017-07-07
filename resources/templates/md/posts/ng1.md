@@ -5,9 +5,9 @@
  :mathy true
  :tags  ["meta" "test" "math"]}
  
-One of the things I'm doing at [RC](https://www.recurse.com/) is working through [the mathier version](https://see.stanford.edu/Course/CS229/54) of Andrew Ng's famous machine learning course. Here are my notes from the first substantive lecture (lecture 2). (I'm not sure if the math will work, I just tried to fire up Mathjax...)
+One of the things I'm doing at [RC](https://www.recurse.com/) is working through [the mathier version](https://see.stanford.edu/Course/CS229/54) of Andrew Ng's famous machine learning course. Here are my notes from the first substantive lecture (lecture 2). 
 
-(Edit: for future reference, [underscores for subscripts need to be escaped out to get them through the markdown parser to mathjax](https://github.com/mathjax/MathJax/issues/329).  Which is really annoying, because I also want to generate PDF notes from the same document; I'm not sure if the Pandoc PDF conversion will like that escaping... grrr. Am I going to have to add a preprocessing step?  Really?)
+n.b. the math is all in code blocks because the markdown processor screws with underscores and carets otherwise, and mathjax can't handle that.  This is making me insane and I might actually write some kind of post-processor to jerk around the generated html files to fix this, but it'll have to do for now.
 
 ## Lecture 2
 
@@ -33,11 +33,13 @@ n is the number of features
 
 (Aaah, why not use n for the number of observations like scientists do?  Why can we not have consistent naming and notation in this world? Also, at some point when I was in grad school, we made a Stanford polisci t-shirt that had the slogan "it's not the size of your n, it's how you use it." Where did that go? I miss that shirt.)
 
-$J(\theta)$ is the sum of squared errors / 2.  (Apparently, from discussion afterward with mathier people, these get divided by 2 in order to make differentiation cleaner.)
+`$J(\theta)$` is the sum of squared errors / 2.  (Apparently, from discussion afterward with mathier people, these get divided by 2 in order to make differentiation cleaner.)
 
 Gradient descent algorithm:
 
-update $$\theta\_i := \theta\_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
+```
+update $$\theta_i := \theta_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
+```
 
 that is, update the ith weight by subtracting the partial derivative of the cost (J(θ)) with respect to the ith weight (30:29 in video 2).
 
@@ -49,11 +51,13 @@ This [lecture](https://www.youtube.com/watch?v=i94OvYb6noo) (suggested by a batc
 
 Ultimately, it's just taking a step in the direction of the (local) minimum error.
 
-After doing the calculus, that turns into: $$\theta\_i : = \theta\_i - \alpha (h\_{\theta}(x) - y) \cdot x\_i$$ 
+After doing the calculus, that turns into: 
+
+```$$\theta_i : = \theta_i - \alpha (h_{\theta}(x) - y) \cdot x_i$$ ```
 
 where alpha is the learning rate (a model parameter). This is for one training example.
 
-which is super convenient, since $(h\_{\theta}(x) - y)$ is just the straightforward error at a given step.
+which is super convenient, since `$(h_{\theta}(x) - y)$` is just the straightforward error at a given step.
 
 ### Batch gradient descent
 
@@ -84,7 +88,7 @@ for j = 1 to m:
     perform an update using just the jth training example (for each i) 
 ```
 
-that update is just  $$\theta\_i : = \theta\_i - \alpha (h\_{\theta}(x^{(j)}) - y^{(j)}) \cdot x\_i^{(j)}$$ 
+that update is just  ```$$\theta_i : = \theta_i - \alpha (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$ ```
 
 in practice, this tends to go rather faster for large datasets. It doesn't actually converge exactly to the global minimum, but they tend to wander close to it. 
 
@@ -96,22 +100,24 @@ More new notation, for matrix derivatives. I mostly let this go by, because I fe
 
 A few points of interest: explanation of the stuff in the notes:
 
-delta J, J is a function of vector parameters theta, recall. The derivative of J with respect to theta is itself a vector of partial derivatives, a n+1 dimensional vector. So then we can rewrite the batch gradient example as theta (not subscripted---it's the whole thing, update the whole paramerer) minus that big gradient, i.e., $$\theta := \alpha \nabla\_\theta J$$ --and all of those quantities are N+1dimensional vectors. (except alpha, obvs)
+delta J, J is a function of vector parameters theta, recall. The derivative of J with respect to theta is itself a vector of partial derivatives, a n+1 dimensional vector. So then we can rewrite the batch gradient example as theta (not subscripted---it's the whole thing, update the whole paramerer) minus that big gradient, i.e., `$\theta := \alpha \nabla_\theta J$` --and all of those quantities are N+1dimensional vectors. (except alpha, obvs)
 
-Definition that feel like a bit of linear algebra I skipped: if A is a square matrix, the *trace* of A is the sum of A's diagonal elements. $tr A = \sum\_{i=1}^n A\_{ii}$ Which sounds like skipped-over linear algebra to me.
+Definition that feel like a bit of linear algebra I skipped: if A is a square matrix, the *trace* of A is the sum of A's diagonal elements. `$tr A = \sum_{i=1}^n A_{ii}$` Which sounds like skipped-over linear algebra to me.
 
 Ultimately this leads to the classic closed form solution to OLS, which shows up on pg. 11 of part 1 of lecture notes. 
 
 Also might be worth noting (from video at 1:00) that the "design matrix" is a matrix that has the training examples input values on the rows.  In notes and on chalkboards, there's a very confusing notation with dashes and an unexplained superscript with a  T in it... but I take it that the first row is the vector of features for first training example, second row is for second draining example (from video at 1:01).
 
-Then design matrix multiplied by theta vector is just the hypotheses for a given set of weights.  And the error is going to be elementwise subtracting the elements of the y vector (label vector, which gets an arrow over it in the notes like $\overrightarrow{y}$).
+Then design matrix multiplied by theta vector is just the hypotheses for a given set of weights.  And the error is going to be elementwise subtracting the elements of the y vector (label vector, which gets an arrow over it in the notes like `$\overrightarrow{y}$`).
 
 Anyway, classic closed form: 
 
+```
 $$\theta = (X^TX)^{-1}X^T\overrightarrow{y}$$
+```
 
 This is our old friend OLS. Hello OLS. You're also [enjoyably easy to implement in clojurescript](https://github.com/paultopia/browser-stats/blob/master/statspop/src/statspop/math/regression.cljs#L15).
 
-Note at the end of the lecture in response to a student question: usually, if $X\^Tx$ isn't invertible, it's because you've got dependent features in there, like repeating the same feature twice or something. (or linear combination, I take it? Standard OLS blow-up...)
+Note at the end of the lecture in response to a student question: usually, if `$X^Tx$` isn't invertible, it's because you've got dependent features in there, like repeating the same feature twice or something. (or linear combination, I take it? Standard OLS blow-up...)
 
 that's it!
