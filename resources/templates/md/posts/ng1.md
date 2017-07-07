@@ -59,9 +59,9 @@ which is super convenient, since $(h\_{\theta}(x) - y)$ is just the straightforw
 
 For m training examples, the algorithm just sums the error over the training examples, i.e.,
 
-<pre>
+```
 $$\theta_i : = \theta_i - \alpha \sum_{j=1}^{m} (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$ 
-</pre>
+```
 
 and then repeat until convergence
 
