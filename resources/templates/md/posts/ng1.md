@@ -53,7 +53,9 @@ Ultimately, it's just taking a step in the direction of the (local) minimum erro
 
 After doing the calculus, that turns into: 
 
-```$$\theta_i : = \theta_i - \alpha (h_{\theta}(x) - y) \cdot x_i$$ ```
+```nohighlight
+$$\theta_i : = \theta_i - \alpha (h_{\theta}(x) - y) \cdot x_i$$
+```
 
 where alpha is the learning rate (a model parameter). This is for one training example.
 
@@ -63,7 +65,7 @@ which is super convenient, since `$(h_{\theta}(x) - y)$` is just the straightfor
 
 For m training examples, the algorithm just sums the error over the training examples, i.e.,
 
-```
+```nohighlight
 $$\theta_i : = \theta_i - \alpha \sum_{j=1}^{m} (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$ 
 ```
 
