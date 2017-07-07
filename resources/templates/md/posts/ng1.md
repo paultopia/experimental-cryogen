@@ -91,6 +91,7 @@ for j = 1 to m:
 ```
 
 that update is just  
+
 ```nohighlight 
  $$\theta_i : = \theta_i - \alpha (h_{\theta}(x^{(j)}) - y^{(j)}) \cdot x_i^{(j)}$$
 ```
@@ -118,7 +119,7 @@ Then design matrix multiplied by theta vector is just the hypotheses for a given
 Anyway, classic closed form: 
 
 ```nohighlight 
-$$\theta = (X^TX)^{-1}X^T\overrightarrow{y}$$
+ $$\theta = (X^TX)^{-1}X^T\overrightarrow{y}$$
 ```
 
 This is our old friend OLS. Hello OLS. You're also [enjoyably easy to implement in clojurescript](https://github.com/paultopia/browser-stats/blob/master/statspop/src/statspop/math/regression.cljs#L15).
