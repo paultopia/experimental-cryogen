@@ -38,7 +38,7 @@ n is the number of features
 Gradient descent algorithm:
 
 ```nohighlight
-update $$\theta_i := \theta_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
+ $$\theta_i := \theta_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
 ```
 
 that is, update the ith weight by subtracting the partial derivative of the cost (J(θ)) with respect to the ith weight (30:29 in video 2).
@@ -53,7 +53,7 @@ Ultimately, it's just taking a step in the direction of the (local) minimum erro
 
 After doing the calculus, that turns into: 
 
-```nohighlight
+```nohighlight 
 $$\theta_i : = \theta_i - \alpha (h_{\theta}(x) - y) \cdot x_i$$
 ```
 
