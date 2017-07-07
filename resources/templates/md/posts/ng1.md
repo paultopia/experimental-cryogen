@@ -37,7 +37,7 @@ n is the number of features
 
 Gradient descent algorithm:
 
-```
+```nohighlight
 update $$\theta_i := \theta_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
 ```
 
