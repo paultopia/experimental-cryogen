@@ -12,11 +12,11 @@ This is pretty easily represented in code terms. An extensive form game is just 
 
 The cool thing is that when you get backward induction, the idea generalizes to other kinds of problems. For example, there's a project Euler problem that asks you to find the maximum value path from top to bottom of a pyramid of numbers that maximizes the sum of the numbers in that path.  Something like this: 
 
-<pre>
+```
     4
    5 9
   7 9 5
-</pre>
+```
 
 where the answer would be 22 (4-9-9).  Only, you know, much bigger.
 
@@ -24,10 +24,10 @@ When you realize that this is just a tree with the same kind of maximization pro
 
 So, in the toy example above, the first round of updating looks like this: 
 
-<pre>
+```
     4
   14 18
-</pre>
+```
 
 that is, 5 becomes `5 + max(7, 9)`, 9 becomes `9 + max(9, 5)` and so forth.
 
