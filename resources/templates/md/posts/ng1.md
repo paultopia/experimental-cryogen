@@ -7,6 +7,8 @@
  
 One of the things I'm doing at [RC](https://www.recurse.com/) is working through [the mathier version](https://see.stanford.edu/Course/CS229/54) of Andrew Ng's famous machine learning course. Here are my notes from the first substantive lecture (lecture 2). (I'm not sure if the math will work, I just tried to fire up Mathjax...)
 
+(Edit: for future reference, [underscores for subscripts need to be escaped out to get them through the markdown parser to mathjax](https://github.com/mathjax/MathJax/issues/329).)
+
 ## Lecture 2
 
 Linear regression, mostly stuff I've already seen a bunch of times, but with the derivations using weirder linear algebra than usual, and with more gradient descent and less closed-form solutions.
@@ -31,11 +33,11 @@ n is the number of features
 
 (Aaah, why not use n for the number of observations like scientists do?  Why can we not have consistent naming and notation in this world? Also, at some point when I was in grad school, we made a Stanford polisci t-shirt that had the slogan "it's not the size of your n, it's how you use it." Where did that go? I miss that shirt.)
 
-J($\theta$) is the sum of squared errors / 2.  (Apparently, from discussion afterward with mathier people, these get divided by 2 in order to make differentiation cleaner.)
+$J(\theta)$ is the sum of squared errors / 2.  (Apparently, from discussion afterward with mathier people, these get divided by 2 in order to make differentiation cleaner.)
 
 Gradient descent algorithm:
 
-update $\theta_i$ by: $$\theta_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
+update $$\theta\_i := \theta\_i - \partial \frac{\partial}{\partial \theta} J(\theta)$$
 
 that is, update the ith weight by subtracting the partial derivative of the cost (J(θ)) with respect to the ith weight (30:29 in video 2).
 
