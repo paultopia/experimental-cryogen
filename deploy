@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "preprocessing the math"
+planck preprocess-math.cljs
 echo "Building"
 lein run
 echo "Deploying blog post"

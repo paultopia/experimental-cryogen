@@ -3,6 +3,7 @@
  :date "2017-07-07"
  :executable false
  :mathy true
+ :math-preprocessed true
  :tags  ["meta" "test" "math"]}
  
 One of the things I'm doing at [RC](https://www.recurse.com/) is working through [the mathier version](https://see.stanford.edu/Course/CS229/54) of Andrew Ng's famous machine learning course. Here are my notes from the first substantive lecture (lecture 2). 
