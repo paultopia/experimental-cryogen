@@ -1,11 +1,9 @@
 {:title "Mathy Ng Lecture 5: generative learning algorithms, naive bayes", :layout :post, :date "2017-07-17", :executable false, :mathy true, :math-preprocessed true, :tags ["machine learning" "math"]}
 
 
-## Ng Lecture 4: Newton's Method, Exponential Family Distributions, GLMs.
+## Ng lecture 5: generative learning algorithms
 
-# Ng lecture 5: generative learning algorithms
-
-## The idea of generative algorithms
+### The idea of generative algorithms
 
 Algorithms like logistic regression are like "try to find a straight line that separate the classes best." Those are discriminative learning algorithms.
 
@@ -21,7 +19,7 @@ By contrast, a generative algorithm models p(x|y) and p(y).  It builds a model o
 
 Then Bayes rule steps in, because of course it does. 
 
-## Gaussian discriminant analysis: 
+### Gaussian discriminant analysis: 
 
 Assumes input features are continuous-values random variables and p(x|y) is multivariate gaussian. 
 
@@ -43,7 +41,7 @@ Essentially, you're building a model of p(x|y=1), a model of p(x|y=0), and fit a
 Much more simple and straightforward version: what he gives us is just a closed-form solution, like the matrix multiplication in regression.  We have the maximum likelihood function (page 6 of [notes 2](https://see.stanford.edu/materials/aimlcs229/cs229-notes2.pdf)) and we seriously just plug our data into it.  Then we have [an estimate of] the probability distribution of y, and ditto for x|y=0 and x|y=1. Given that information, and some x, we can plug in an observed value for x into the distributions we got from our training, and hence have point estimates on all those distributions. Then from those point estimates, we apply bayes rule.  (Or at least I think this is how it goes.)
 
 
-## Naive bayes
+### Naive bayes
 
 The conditional independence across the x's assumption is, well, false, like always. (That's the naive part.)  But it works surprisingly well for, e.g., classifying text documents.  
 
@@ -61,13 +59,13 @@ So I'm guessing that to actually predict, you compute the product of the p(x|y) 
 
 Also, here's [another explanation](https://www.youtube.com/watch?v=TpjPzKODuXo&list=PL6397E4B26D00A269&index=26) of how Naive Bayes works by more Stanford profs Dan Jurafsky & Chris Manning (and [second part](https://www.youtube.com/watch?v=0hxaqDbdIeE&index=27&list=PL6397E4B26D00A269)).
 
-## Laplace smoothing
+### Laplace smoothing
 
 What happens when you try to classify something with a word that wasn't in your training set?  Oh boy, you're dividing by zero when you apply bayes rule. That's bad.  (The numerator is 0 too thanks to some products.  Bad.)
 
 So what we just do is, instead of calculating the probability p(xi|y=1) with the raw proportion, we add 1 to the numerator and k, where k is the number of possible values for xi (i.e., 2, with all these dichotomous variables we're working with). (or is it possible values for y? should investigate.)  And we do that with our other maximum likelihood estimators too. Essentially we just add 1 to every count, including the counts in the denominator.  That keeps the probabilities of unseen events from being 0, which is nice, but keeps the good statistical properties.
 
-(question: why don't we just drop words that don't appear in the training data from our predictions?)
+(question: why don't we just drop words that don't appear in the training data from our predictions?  Answer, after chatting with a fellow Recurser: because it's not just that unseen features in the training set will generate zero posterior probabilities, but also that if a feature hasn't been seen in *just one* of the classes, that will make the probability for that class go to zero.  So you'd have to drop more than just words that never appeared, you'd have to throw out all words that appeared only in one class, which would toss out a ton of useful information.)
 
 So I take naive bayes to be, from start to finish:
 
