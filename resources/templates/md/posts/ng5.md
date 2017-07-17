@@ -82,3 +82,5 @@ So I take naive bayes to be, from start to finish:
 5. Remember to do previous step with laplace smoothing. (add 1 to each numerator, and 2 to each denominator for binary feature)
 
 6. then for a prediction, just take every word, then, for each class multiply out the conditional probabilities for each word given that class and the class, and divide by the overall probability of that data, as shown on the last formula on page 10 of the notes. Then predict the class where that product is highest. If an unknown word appears, it just gets the conditional probability 1/2 or whatever other laplace denominator you use for every class, thanks to smoothing.
+
+Possible correction: should step 2 (dictionary creation) be based on all words in existing training set, or based on a preexisting dictionary s.t. we assign uninformative priors via laplace smoothing to words that don't appear in training set right from start?  This might just be a matter of choice/convenience for improving the model over time? 
