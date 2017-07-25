@@ -43,12 +43,12 @@ body {
 }
 
 ::selection {
-    background: #A71E2E;
+    background: ##C46BF3;
     color: #FFF;
 }
 
 ::-moz-selection {
-    background: #A71E2E;
+    background: ##C46BF3;
     color: #FFF;
 }
 
@@ -76,7 +76,7 @@ img.imgfull {
     width: 100%;
     max-width: 1000px;
     margin: 0 0 20px 0;
-    border-top: 5px solid #A71E2E;
+    border-top: 5px solid ##C46BF3;
 }
 
 /* ==================================================
@@ -109,7 +109,7 @@ img.imgfull {
     bottom: 0;
     width: 100%;
     max-width: 280px;
-    background: #A71E2E;
+    background: ##C46BF3;
     color: #FFF;
     z-index: 3;
     overflow-y: auto;
