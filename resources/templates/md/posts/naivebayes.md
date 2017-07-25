@@ -24,7 +24,7 @@ x_probs_conditional_on_notspam=[conditional_probability_dict(x, notspams) for x 
 x_notspam_lookup = toolz.merge(x_probs_conditional_on_notspam)
 ```
 
-What this produces is a dict of priors on each x for each state of y, plus a prior on y. Note that we use [Laplace smoothing](https://stats.stackexchange.com/a/171210/69606) to calculate our x priors, otherwise if a feature isn't see for one of our labels, we end up just predicting zero for it. 
+What this produces is a dict of priors on each x for each state of y, plus a prior on y. Note that we use [Laplace smoothing](https://stats.stackexchange.com/a/171210/69606) to calculate our x priors, otherwise if a feature isn't seen for one of our labels, we end up just predicting zero for it. 
 
 Then a "prediction" is simply an application of Bayes Rule to estimate the probability of y=1 and the probability of y=0 for each observation. Recall that Bayes Rule is: 
 
