@@ -18,3 +18,5 @@ The easiest method to do this that I can discern is to just wrap it in a future.
 ```
 
 then, when you want to tear down the foreign process, you can kill it using `future-cancel`.  So to take down the python process, `(future-cancel python)` will be quite sufficient.  (Rabbitmq is a bit tougher, see the repo linked above for deets.)
+
+WARNING: this doesn't seem to be totally reliable.  For example, sometimes (like in my rabbitmq tests), I can get it to spin up and shut down processes, but I can't seem to be able to send messages to the background processes.  Other times, I can get it to spin up a process that will write to disk, but won't shut down on using `future-cancel`.
