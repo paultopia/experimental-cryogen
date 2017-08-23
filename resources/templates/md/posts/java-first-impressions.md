@@ -12,7 +12,7 @@ Second, I feel like I should know at least one strongly typed language, and I ho
 
 So I think I actually... like Java?  [They might take away my functional programmer card for this](https://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html), but I do.  I'm trying to do the [Matasano Crypto Challenges](http://cryptopals.com) with it, by way of learning, and so far (only a few challenges in) it's actually going ok. Here are my first impressions..
 
-# Java doesn't have a lot of magic
+## Java doesn't have a lot of magic
 
 I find that getting Python to do low-ish-level stuff is surprisingly hard. For example, if you want to actually see a string represented as a list of bytes, it involves digging around into libraries that nobody really uses, and you run into issues between Python 2 and Python 3, and, in all honestly, I still don't know how it all works. Like, Python 2 represents all strings internally as bytes by default, but supposedly Python 3 represents strings as unicode internally by default, but *since unicode is also just a bunch of bytes, what does that even mean?*  What it seems to mean in practice is that it's really hard to get to see the bytes.  If, for instance, you follow [this SO](https://stackoverflow.com/questions/7585435/best-way-to-convert-string-to-bytes-in-python-3) and do `'foo'.encode()`, what you get back, at least as it's representated at the repl, is `b'foo'`.  Which is pretty useless.  (What you really need to do is something like ` [int(x) for x in 'foo'.encode()]`.)
 
@@ -22,11 +22,15 @@ That straightforwardness makes it nice and easy to do things like implement [a u
 
 So three cheers for less magic!  (And this is making me wonder if I should really be writing C...)
 
-# This thing is fast!
+Addendum: a wiser person on a private forum (R, let me know if you want to be credited!) has kindly explained to me that, in essence, this only seems more straightforward to me because I'm on a system where `.getBytes()`, which uses the default character set, is doing things that I expect---where what I expect is UTF-8, because that's the one that treats the ASCII characters that I'm working with like they fit into a single byte. The wise person further contrasted Java and Python to Rust and Go, where the latter force you into UTF-8, while the former make you be more explicit about the encoding.  Thanks, wise person!  
+
+Relatedly, [this](http://kunststube.net/encoding/) is an amazing explanation of how encoding things work.  
+
+## This thing is fast!
 
 To be fair, I haven't asked it to do anything actually difficult yet. But the [4th crypto challenge](http://cryptopals.com/sets/1/challenges/4) is at least a *little bit* of computational effort---it does i/o and also has a healthy number of loops to go through; I would have expected like a quarter second hiccup, but Java spits out the answer instantly.  I can't wait to see how it works on more computationally intensive stuff.
 
-# Java has a lot of types.
+## Java has a lot of types.
 
 The primitive types like int, char, all that good stuff, all have ["boxed" versions that serve as objects](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html).  I assume this is for perf reasons, but it's a little odd.  Thankfully, for the most part, things seem to be pretty seamless here.  
 
@@ -52,9 +56,9 @@ Sometimes this feels like another primitive/object distinction. For example, the
 But I don't actually mind this too much.  Partly because I rather suspect that it has a lot to do with the previous point about performance...
 
 
-# Java is weirdly picky about filenames and directories
+## Java is weirdly picky about filenames and directories
 
-This is something that just straight-up annoys me.  Java has this concept of a "classpath" that is nowhere really clearly explained. As far as I can from trial and error and reading SO answers, I'm developing a (doubtly highly inaccurate) mental model of the classpath as essentially a brittle virtual filesystem where things start blowing up if everything isn't exactly where it's expected, named what it's expected to be.  (And I can't find anywhere where all the naming and putting things in directories rules are written down.) 
+This is something that just straight-up annoys me.  Java has this concept of a "classpath" that is nowhere really clearly explained. As far as I can from trial and error and reading SO answers, I'm developing a (doubtlessly highly inaccurate) mental model of the classpath as essentially a brittle virtual filesystem where things start blowing up if everything isn't exactly where it's expected, named what it's expected to be.  (And I can't find anywhere where all the naming and putting things in directories rules are written down.) 
 
 For example, I had a two-hour battle today with the following task: I had the entry point of my code outside the "package" folder where all of the classes doing the work were, and I wanted to move it inside that folder.  Turns out that meant adding package declarations, and removing import declarations, and adding a class to the name of the file I was running... it's crazy.
 
@@ -62,11 +66,11 @@ Incidentally, weird thing I learned in the process of that---the `java` command 
 
 Here, I'm not at all happy with Java.  I don't mind the Kingdom of Nouns stuff, but this classpath stuff is bloody terrible and I hate it.  Absolutely my least favorite thing about Java, and why the next thing I'm going to do is go learn Gradle so as to offload all this ugliness to a build tool.
 
-# Java People are really unfriendly on Stack Overflow
+## Java People are really unfriendly on Stack Overflow
 
 When I [asked](https://stackoverflow.com/questions/45823179/java-newbie-class-with-main-class-in-same-folder-as-subclasses-doesnt-compile) about how to make the file moving thing work on SO, within about 2 minutes I had 3 downvotes and 2 hostile comments.  Now, I'm not a SO super-user, but I've been using it for a while, I know how to ask a decent question, and while I don't have a ton of reputation, I at least have 700-some, which is more than total beginner.  So I don't think I asked a total boner of a question.  I think that Java people on SO are just much, much more unfriendly than Python/Clojure/Javascript/R people (my usual SO crowd). 
 
-The snotty functional programming person in me wonders if maybe this is because PG is right, and Java is full of [blub programmers](http://www.paulgraham.com/avg.html) who have successfully alienated the SO crowd over the years with terrible questions.
+The snotty functional programming person in me wonders if maybe this is because PG is right, and Java is full of [blub programmers](http://www.paulgraham.com/avg.html) who have successfully alienated the SO crowd over the years with terrible questions. But that's a jerky thing to think, and it's also pretty unlikely to be right.
 
 Anyway, I ultimately rewrote the question and got enough hints to sort the problem out, but it was a shocking blast of cold water in the face to get there, and felt quite weird, to be honest. 
 
