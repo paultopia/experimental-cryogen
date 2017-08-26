@@ -8,15 +8,13 @@ So I'm getting into Flask on Heroku for this kind of thing, for several reasons:
 
 2. Making changes is seriously just pushing to a git remote. 
 
-3. Logging is just print(). 
+3. You can use interact with a real database shell via `heroku pg:psql`, *or* you can write canned queries and look at them online, or you can even sync them to google sheets (though that last one seems a bit shaky).
 
-4. You can use interact with a real database shell via `heroku pg:psql`, *or* you can write canned queries and look at them online, or you can even sync them to google sheets (though that last one seems a bit shaky---I think because google sheets itself is a bit shaky).
+4. Logs are just as simple as `heroku logs` and logging something from the application is just `print()`.
 
-5. Logs are just as simple as `heroku logs` and logging something from the application is just `print()`.
+5. No mess with ngnix and other server config stuff. 
 
-6. No mess with ngnix and other server config stuff. 
-
-7. HTTPS is handled for you too, at least on applications served from herokuapp.com. Which is real nice, obviously.
+6. HTTPS is handled for you too, at least on applications served from herokuapp.com. Which is real nice, obviously.
 
 7. By the way, you get a falls-asleep-a-lot-but-good-enough-for-tiny-projects + 10k postgres rows for free. 
 
@@ -32,23 +30,27 @@ So let's walk through the simplest possible setup.
 
 3. Install postgres locally, so you can use Heroku psql, pull down from Heroku to a local database, etc.
 
-4. Set up a python virtual environment. This is usually a good idea anyway, but particularly important here because you'll be using `pip freeze` to get the requirements for Heroku, so you want to make sure you have a self-contained and reproducible environment. I'm a big anaconda fan, so I just use [conda](https://conda.io/docs/user-guide/tasks/manage-environments.html) to handle this for me, but other virtual environment managers should work fine too.
+4. Set up a python virtual environment. This is usually a good idea anyway, but particularly important here because you'll be using `pip freeze` to get the requirements for Heroku, so you want to make sure you have a self-contained and reproducible environment. 
+
+I'm a big anaconda fan, so I just use [conda](https://conda.io/docs/user-guide/tasks/manage-environments.html) to handle this for me, but other virtual environment managers should work fine too.
 
 Incidentally, the following code assumes the latest version of Python 3. It'll probably work fine on Python 2 as well, but who really knows?
 
 4. Pip-install the following libraries. 
 
-- **Flask** --- of course, this is a Flask-based tutorial. It's about the easiest possible way to get basic web stuff happening in Python.
+**Flask** --- of course, this is a Flask-based tutorial. It's about the easiest possible way to get basic web stuff happening in Python.
 
-- **Flask-Heroku** --- this is just a very simple library that takes care of getting the heroku environment variables and passing them to your flask application in the right way. Not strictly necessary, but why make life harder for yourself?
+**Flask-Heroku** --- this is just a very simple library that takes care of getting the heroku environment variables and passing them to your flask application in the right way. Not strictly necessary, but why make life harder for yourself?
 
-- **SQLAlchemy** --- the standard library for connecting to a relational database in Python. It's really complicated, but it seems to work fine for me while only brushing the absolute surface, and with the help of the next library.
+**SQLAlchemy** --- the standard library for connecting to a relational database in Python. It's really complicated, but it seems to work fine for me while only brushing the absolute surface, and with the help of the next library. 
 
-- **Flask-SQLAlchemy** --- simplifies the SQLAlchemy API for Flask purposes.
+It's worth noting that SQLAlchemy, contrary to the Zen of Python, seems to have a million different ways to do everything, so different tutorials and documentation might have slightly different approaches to the table creation syntax and such.
 
-- **Psycopg2** --- Postgres database driver.
+**Flask-SQLAlchemy** --- simplifies the SQLAlchemy API for Flask purposes.
 
-- **Gunicorn** --- just a communication layer between the server and your code, probably not strictly mandatory in quick-and-dirty hack-together apps with only a couple of users, but never hurts and can help manage lots of requests at once should they happen. For more, see [this explanation of WSGI](https://www.fullstackpython.com/wsgi-servers.html), and [this real-life account](https://ironboundsoftware.com/blog/2016/06/27/faster-flask-need-gunicorn/).
+**Psycopg2** --- Postgres database driver.
+
+**Gunicorn** --- just a communication layer between the server and your code, probably not strictly mandatory in quick-and-dirty hack-together apps with only a couple of users, but never hurts and can help manage lots of requests at once should they happen. For more, see [this explanation of WSGI](https://www.fullstackpython.com/wsgi-servers.html), and [this real-life account](https://ironboundsoftware.com/blog/2016/06/27/faster-flask-need-gunicorn/).
 
 ## Step 2: Write some code
 
@@ -68,7 +70,13 @@ heroku = Heroku(app)
 db = SQLAlchemy(app)
 ```
 
-Most of the work here is just creating objects in the global namespace that will hold your app and database.  The `Heroku(app)` line just [puts your environment variables where they need to be](https://github.com/kennethreitz/flask-heroku). The `app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False` line is to [fix performance hits from a bad default config (and silence an annoying warning)](https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications/33790196#33790196). The rest should be pretty clear.
+Most of the work here is just creating objects in the global namespace that will hold your app and database.  
+
+The `Heroku(app)` line just [puts your environment variables where they need to be](https://github.com/kennethreitz/flask-heroku). 
+
+The `app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False` line is to [fix performance hits from a bad default config (and silence an annoying warning)](https://stackoverflow.com/questions/33738467/how-do-i-know-if-i-can-disable-sqlalchemy-track-modifications/33790196#33790196). 
+
+The rest should be pretty clear.
 
 ### B. Set up a database
 
@@ -82,9 +90,15 @@ class Dataentry(db.Model):
         self.mydata = mydata
 ```
 
-Pretty straightforward. You create a class that inherits from the model class that your db object brought in, and then you put the table schema into the fields of that class. SQLAlchemy will happily automatically supply that id column for you (I'm not sure, however, if this is because it's called "id" or if this is because it's declared as a primary key). Then whatever other columns you want, you can declare and pass their type.  SQLAlchemy has [a bunch of types available](http://docs.sqlalchemy.org/en/latest/core/types.html), including all the basics, but also database-vendor-specific types, different flavors of datetimes, etc.
+Pretty straightforward. You create a class that inherits from the model class that your db object brought in, and then you put the table schema into the fields of that class. 
 
-Then the constructor for an object just sets the properties based on data received from users. Hey, maybe we should get some data in?
+SQLAlchemy will [happily auto-increment an integer primary key for you](http://docs.sqlalchemy.org/en/rel_1_1/core/metadata.html#sqlalchemy.schema.Column.params.autoincrement).
+
+Whatever columns you want, you can declare and pass their type.  SQLAlchemy has [a bunch of types available](http://docs.sqlalchemy.org/en/latest/core/types.html), including all the basics, but also database-vendor-specific types, different flavors of datetimes, etc.
+
+Then the constructor ([ok, really the initializer](http://spyhce.com/blog/understanding-new-and-init)) for an object just sets the properties based on data received from users. 
+
+Hey, maybe we should get some data?
 
 ### C. Set up a route to receive data
 
@@ -110,15 +124,21 @@ Ok, this one is a little more complicated.
 
 The first line is just a decorator that tells Flask that the function below services a route, gives it the route to service (see the Flask docs for all the interesting stuff you can do with routes), and tells it what methods to accept.
 
-The function initializes that object we created above, and passes it the data we received on our form. Note that this is as fields on a `request` object, which is actually a global. This is a Flask thing, and I think it's a real WTF design decision---Flask should make you pass it into the function as a parameter, but the Flask people made the choice to make it a global, so a global it is. 
+The function initializes that object we created above, and passes it the data we received on our form. 
 
-Then I have some real seat-of-the-pants error handling in here. Heroku doesn't let you save data to any kind of filesystem---your choices are database or nothing. But it does have built-in logging (though it only keeps something like 1500 lines of logs unless you pay for a service from someone to hold onto more), and it makes it real easy to get it: anything your application saves to stdout goes into a log.  
+Note that this is as fields on a `request` object, which is actually a global. This is a Flask thing, and I think it's a real WTF design decision---Flask should make you pass it into the function as a parameter, but the Flask people made the choice to make it a global, so a global it is. 
+
+Then I have some real seat-of-the-pants error handling in here. Heroku doesn't let you save data to a filesystem---your choices are database or nothing. But it does have built-in logging (though it only keeps something like 1500 lines of logs unless you pay for a service from someone to hold onto more), and it makes it real easy to get it: anything your application saves to stdout goes into a log.  
 
 Since database writes can be finicky, I'm just catching all errors and logging them, along with all the data that it attempted to write. (And since users don't need to know that the database write failed, I'm telling them to keep going.)
 
-Some of the slightly more obscure mechanics: `indata.__dict__` is a dictionary containing all the properties of the object. It will include stuff that SQLAlchemy added in too, some of which isn't serializable as JSON, so I just delete it for purposes of logging. `sys.stdout.flush()` is advisable [just to make sure everything will land in stdout when you think it will](https://stackoverflow.com/questions/10019456/usage-of-sys-stdout-flush-method).
+Some of the slightly more obscure mechanics: 
 
-Finally, the return just sends some html to display to the user. Here, I just stuck it a raw string in order to give some feedback to confirm to the user that, yes, they actually managed to submit the form, and then prompt them to submit some more data if they want. 
+- `indata.__dict__` is a dictionary containing all the properties of the object. It will include stuff that SQLAlchemy added in too, some of which isn't serializable as JSON, so I just delete it for purposes of logging.
+
+- `sys.stdout.flush()` is advisable [just to make sure everything will land in stdout when you think it will](https://stackoverflow.com/questions/10019456/usage-of-sys-stdout-flush-method).
+
+The return sends some html to display to the user. Here, I just use a raw string in order to give some feedback to confirm to the user that, yes, they actually managed to submit the form, and then prompt them to submit some more data if they want. 
 
 Note that the Flask `url_for` function can take a function corresponding to another route, and then intelligently insert the url there.  So this will insert the url for the route corresponding to the enter_data function, which we should probably write... 
 
@@ -147,7 +167,7 @@ That was pretty easy, wasn't it?  This will render a [Jinja2](http://jinja.pocoo
 </html>
 ```
 
-Nothing should be surprising there, with one exception: note that Flask is kind enough to inject the `url_for` function into the template, so you can decouple your view from whatever you do with routes and whatever server you happen to be running on and so forth. This is real nice. 
+Nothing should be surprising there, with one exception: note that Flask is kind enough to inject the `url_for` function into the template, so you can decouple your view from whatever you do with routes and whatever server you happen to be running on and so forth.  
 
 ### D. Finish it off
 
@@ -157,7 +177,9 @@ if __name__ == '__main__':
     app.run()
 ```
 
-When it's called from the commandline run the app. Pretty sweet. I stuck the commented-out line in there to reveal one of the other really sweet things about Flask: it has an *amazing* debugger; if you run it in debug mode then when something blows up you'll be able to inspect the state right from the web page it generates. Obviously don't use this in production, unless you *want* to make life easy for malicious actors.
+When it's called from the commandline run the app. 
+
+I stuck the commented-out line in there to reveal one of the other really sweet things about Flask: it has an *amazing* debugger; if you run it in debug mode then when something blows up you'll be able to inspect the state right from the web page it generates. Obviously don't use this in production, unless you *want* to make life easy for malicious actors.
 
 That's it, that's all the code we need for a minimal app!
 
@@ -187,11 +209,11 @@ It really is that easy!  The output of the heroku create command, incidentally, 
 
 There's one more step, however, and that's to setup the database. Two substeps: 
 
-1. Create the database in Heroku. The free flavor is the hobby-dev one (that's where you have a 10,000 row limit). Everything else is actually quite expensive.  That's as simple as `heroku addons:create heroku-postgresql:hobby-dev` 
+- Create the database in Heroku. The free flavor is the hobby-dev one (that's where you have a 10,000 row limit). Everything else is actually quite expensive.  That's as simple as `heroku addons:create heroku-postgresql:hobby-dev` 
 
 (If you have more than one database, you'll have to [do a little bit more work](https://devcenter.heroku.com/articles/heroku-postgresql#establish-primary-db) to connect it, but for a simple thing, you shouldn't have to bother.)
 
-2.  Create the tables in your new database. The easiest way to do this is to just fire up a Python REPL right on the heroku server and [create the tables from within the app](http://flask-sqlalchemy.pocoo.org/2.1/api/#flask.ext.sqlalchemy.SQLAlchemy.create_all): `heroku run python` from your command line, and then, in the repl, `from app import db` and `db.create_all()`. 
+- Create the tables in your new database. The easiest way to do this is to just fire up a Python REPL right on the heroku server and [create the tables from within the app](http://flask-sqlalchemy.pocoo.org/2.1/api/#flask.ext.sqlalchemy.SQLAlchemy.create_all): `heroku run python` from your command line, and then, in the repl, `from app import db` and `db.create_all()`. 
 
 **That's it!  You're done!** If everything went well, the app should be live and functioning.
 
@@ -199,9 +221,9 @@ There's one more step, however, and that's to setup the database. Two substeps:
 
 - If you want to update the (non-databasey) code in the application, it's as simple as pushing new changes to the Heroku remote. 
 
-- To see the logs, go to the repo and do `heroku logs`
+- To see the logs, go to the repo and do `heroku logs`.
 
-- To get a database shell, do `heroku pg:psql`
+- To get a database shell, do `heroku pg:psql`.
 
 - To see the data online, probably the easiest approach is to use [dataclips](https://devcenter.heroku.com/articles/dataclips) to see saved queries.
 
@@ -209,9 +231,9 @@ There's one more step, however, and that's to setup the database. Two substeps:
 
 ## Wait a minute, what about local dev, testing, etc.?
 
-I'm not going to cover all that stuff, because this post is too long, but it's probably a good idea to set up local postgres with an actual connection so you can test before deploying. For more information, see the references below. 
+I'm not going to cover all that stuff, because this post is too long as is, but it's probably a good idea to set up local Postgres with an actual connection so you can test before deploying. For more information, see the references below. 
 
-Some people create separate git branches for the local version of the application and the heroku version. 
+Some people create separate git branches for the local version of the application and the Heroku version. 
 
 ## Useful References
 
