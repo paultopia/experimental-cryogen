@@ -1,6 +1,6 @@
 {:title "I think I've figured out how to change text encodings in the browser. I'm not sure, because it's text encodings, but maybe?"
  :layout :post
- :date "2017-08-05"
+ :date "2017-09-05"
  :executable false
  :tags  ["javascript" "web" "unicode" "browsers" "utf-8" "latin-1"]}
  
