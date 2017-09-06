@@ -20,9 +20,9 @@ function parseXML(xmlstring){
     return parser.parseFromString(xmlstring, "text/xml");}
 ```
 
-3. Display some intermediate results on a web page. 
+Step 3. Display some intermediate results on a web page. 
 
-4. Convert the crazy windows encoding to something more rational. This is the fun part. 
+Step 4. Convert the crazy windows encoding to something more rational. This is the fun part. 
 
 Ideally, we'd do this before step 2, but we can't have everything. As it turns out, the browser is perfectly capable of identifying cray Microsoft encodings when they come from a docx file and parsing the XML/displaying them properly on screen without conversion. I'm not sure whether this is Zipjs or something in Chrome performing this magic (or being told to do so by something in the docx/underlying XML), but it works, so I'm not going to look a gift horse in the mouse.
 
