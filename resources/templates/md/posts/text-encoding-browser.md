@@ -10,7 +10,7 @@ This has a lot of steps to it, but the browser is a surprisingly good platform f
 
 Basically, a docx file is a zip file with a different extension, and each of the files inside is an XML file encoded in Latin-1 (or the [slightly different windows-1252](https://stackoverflow.com/a/19111140/4386239), but either way, not nice sensible UTF-8, which is why you get a bunch of [mojibake](https://en.wikipedia.org/wiki/Mojibake) whenever you copy text from Word into anything else).  So this means there are three steps to making it into something useful:
 
-Step 1: Get the [Zipjs](https://gildas-lormeau.github.io/zip.js/) is a very good zip library (if you didn't know, a docx file is just a zip file with a different extension).  
+Step 1: Get the contents unzipped out of the docx format.  [Zipjs](https://gildas-lormeau.github.io/zip.js/) is a very good zip library that handles this task with no problem, it's as simple as hanging a listener on a file upload form that converts to a blob and then passes to `zip.BlobReader`.
 
 Step 2: Parse the XML.  It might be surprising, but it shouldn't be, to learn that the browser is a really good platform for XML parsing. Since, after all, parsing XML is [basically the same task](https://softwareengineering.stackexchange.com/questions/93296/relation-and-differences-between-sgml-xml-html-and-xhtml) as parsing HTML. It's as straightforward as:
 
@@ -20,7 +20,9 @@ function parseXML(xmlstring){
     return parser.parseFromString(xmlstring, "text/xml");}
 ```
 
-Step 3. Display some intermediate results on a web page. 
+and then you can use normal DOM methods and attributes to navigate and get things from the XML, just as if it were a HTML page.
+
+Step 3. Display some intermediate results on a web page. You've got strings, display them.
 
 Step 4. Convert the crazy windows encoding to something more rational. This is the fun part. 
 
