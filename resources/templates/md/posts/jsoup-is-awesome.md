@@ -40,7 +40,7 @@ Similarly, suppose you want a list of links from your document.  That's pretty e
 
 With Jsoup, that's another simple tweak to a single method call.
 
-What this amounts to is that 50 or so lines of code using Enlive turn into 22 lines of code with Jsoup.  Here is all the code you need to fetch a page (admittedly, this needs error handling for failed requests), get out the texts, and get a list of links, resolved to absolute URLs, with titles for every link: 
+What this amounts to is that 50 or so lines of code using Enlive turn into 22 lines of code with Jsoup.  Here is all the code you need to fetch a page (admittedly, this needs error handling for failed requests), get out the text, and get a list of links, resolved to absolute URLs, with titles for every link: 
 
 ```clojure
 (ns myscraper.core
