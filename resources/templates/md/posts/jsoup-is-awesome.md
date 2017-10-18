@@ -8,7 +8,7 @@
  
 When people want to do webscraping in Clojure, the standard recommendation/tutorial library is [Enlive](https://github.com/cgrand/enlive). ([Example](http://masnun.com/2016/03/20/web-scraping-with-clojure.html), [and another](http://ericsomdahl.github.io/posts/2015-03-07-gevents1.html), and there are at least two scraping libraries built on top of Enlive, [Pegasus](http://blog.shriphani.com/2016/01/25/pegasus-a-modular-durable-web-crawler-for-clojure/) and [Skyscraper](https://github.com/nathell/skyscraper).) 
 
-But Enlive doesn't seem to be really built for scraping. For example, it's very difficult to actually get the text (the rough equivalent of browser api `document.innerText`, minus ajax-loaded context) out of a html document, and when you can get text, it comes out badly formatted---e.g., if you just pull all the text from the body tag, you don't get spaces between things like table rows and columns.  The best I can come up with to get decently formatted text without just walking all the individual dom nodes myself is the following tangled mess (where `html` is the Enlive html namespace and I've brought `replace` and `trim` in from clojure.string):
+But Enlive doesn't seem to be really built for scraping. For example, it's very difficult to actually get the text (the rough equivalent of browser api `document.innerText`, minus ajax-loaded context) out of a html document, and when you can get text, it comes out badly formatted---e.g., if you just pull all the text from the body tag, you don't get spaces between things like table rows and columns.  The best I can come up with to get decently formatted text without just walking all the individual DOM nodes myself is the following tangled mess (where `html` is the Enlive html namespace and I've brought `replace` and `trim` in from clojure.string):
 
 ```clojure
 (defn- space-out-punctuation [text] 
@@ -72,4 +72,8 @@ What this amounts to is that 50 or so lines of code using Enlive turn into 22 li
 
 I'm really happy I finally took the trouble to get a handle on Clojure-Java interop---there are a lot of really nice Java libraries out there!  
 
-(Note to self: maybe try out [Reaver](https://github.com/mischov/reaver), which is a library someone built to leverage Jsoup in Clojure.)
+Further reading: 
+
+- [Reaver](https://github.com/mischov/reaver), is a library someone built to leverage Jsoup in Clojure.)
+
+- [A blog post](http://josf.info/blog/2014/10/02/practical-zippers-extracting-text-with-enlive/) with an example of the manually-walking-the-DOM strategy to get text with Enlive.
