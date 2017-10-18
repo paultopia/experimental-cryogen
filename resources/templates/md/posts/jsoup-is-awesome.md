@@ -74,6 +74,6 @@ I'm really happy I finally took the trouble to get a handle on Clojure-Java inte
 
 Further reading: 
 
-- [Reaver](https://github.com/mischov/reaver), is a library someone built to leverage Jsoup in Clojure.)
+- [Reaver](https://github.com/mischov/reaver), a library someone built to leverage Jsoup in Clojure.
 
 - [A blog post](http://josf.info/blog/2014/10/02/practical-zippers-extracting-text-with-enlive/) with an example of the manually-walking-the-DOM strategy to get text with Enlive.
