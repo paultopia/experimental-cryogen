@@ -11,11 +11,14 @@ When people want to do webscraping in Clojure, the standard recommendation/tutor
 But Enlive doesn't seem to be really built for scraping. For example, it's very difficult to actually get the text (the rough equivalent of browser api `document.innerText`, minus ajax-loaded context) out of a html document, and when you can get text, it comes out badly formatted---e.g., if you just pull all the text from the body tag, you don't get spaces between things like table rows and columns.  The best I can come up with to get decently formatted text without just walking all the individual dom nodes myself is the following tangled mess (where `html` is the Enlive html namespace and I've brought `replace` and `trim` in from clojure.string):
 
 ```clojure
-(defn- space-out-punctuation [text] (replace text #"([.?!\",:;“”\)\(\[\]\{\}])" "$1 "))
+(defn- space-out-punctuation [text] 
+  (replace text #"([.?!\",:;“”\)\(\[\]\{\}])" "$1 "))
 
-(defn- space-out-caps-diff [text] (replace text #"([a-z])([A-Z])" "$1 $2"))
+(defn- space-out-caps-diff [text] 
+  (replace text #"([a-z])([A-Z])" "$1 $2"))
 
-(defn- space-out-letter-digit [text] (replace text #"(\d)([a-zA-Z])" "$1 $2"))
+(defn- space-out-letter-digit [text] 
+  (replace text #"(\d)([a-zA-Z])" "$1 $2"))
 
 (defn- de-whitespace [text]
   (trim (replace text #"\s+" " ")))
