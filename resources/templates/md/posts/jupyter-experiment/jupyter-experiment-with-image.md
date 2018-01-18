@@ -4,7 +4,7 @@
  :executable false
  :tags  ["meta" "cryogen" "blog" "python"]}
 
-This is an experiment to see if I can get a jupyter notebook to play nicely with Cryogen.  It looks like it works!  The workflow is to use [nbconvert](https://nbconvert.readthedocs.io/en/latest/usage.html) to turn the notebook to markdown, and then to inline the images as base64.
+This is an experiment to see if I can get a jupyter notebook to play nicely with Cryogen.  It looks like it works!  The workflow is to use [nbconvert](https://nbconvert.readthedocs.io/en/latest/usage.html) to turn the notebook to markdown, add the required cryogen header map, and then inline the images as base64.
 
 The formatting is far from pretty, alas.
 
