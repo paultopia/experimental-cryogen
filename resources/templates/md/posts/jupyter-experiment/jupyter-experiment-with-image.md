@@ -6,6 +6,8 @@
 
 This is an experiment to see if I can get a jupyter notebook to play nicely with Cryogen.  It looks like it works!  The workflow is to use [nbconvert](https://nbconvert.readthedocs.io/en/latest/usage.html) to turn the notebook to markdown, and then to inline the images as base64.
 
+The formatting is far from pretty, alas.
+
 Here's the quick one-off script I used to inline the images from the nbconvert-generated markdown.  Everything below that script came from a jupyter notebook!
 
 ```python
@@ -14,15 +16,10 @@ import re
 def makeb64img(filename):
     with open(filename, "rb") as ju:
         data = ju.read()
-        b64string = data.encode("base64").replace('\n', '')
-    return b64string
+    return data.encode("base64").replace('\n', '')
 
 def swapout(match):
-    #print match.group(1)
-    #print match.group(2)
-    #print match.group(3)
     newstring = "data:image/png;base64," + makeb64img(match.group(2))
-    #print(newstring)
     return match.group(1) + newstring + match.group(3)
 
 with open("jupyter-experiment.md") as je:
