@@ -42,7 +42,6 @@ a:hover, a:focus {
 
 .navbar {
     border-radius: 0;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1); 
 }
 
 .navbar-default {
@@ -82,7 +81,7 @@ a:hover, a:focus {
 }
 
 .dropdown-menu {
-    background-color: var(--main-bg-color);
+    background-color: var(--main-light-color);
 }
 
 .dropdown-header {
