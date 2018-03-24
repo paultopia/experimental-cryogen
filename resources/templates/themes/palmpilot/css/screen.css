@@ -5,7 +5,7 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Alegreya';
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -51,7 +51,7 @@ a:hover, a:focus {
 
 .navbar-default .navbar-brand {
     color: #333;
-    font-family: 'Alegreya';
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -82,6 +82,10 @@ a:hover, a:focus {
 
 .dropdown-menu {
     background-color: var(--main-light-color);
+}
+
+.navbar-brand {
+    font-size: 32px;
 }
 
 .dropdown-header {
