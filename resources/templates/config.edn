@@ -1,4 +1,4 @@
-{:site-title         "Experiments in Tech Blogging (!!)"
+{:site-title         "Gowder's Tech Blog (!)"
  :author             "Paul Gowder"
  :description        "let's see, eh?"
  :site-url           "http://paultopia.github.io"
@@ -14,7 +14,7 @@
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
  :sass-dest          nil
- :theme              "nucleus"
+ :theme              "palmpilot"
  :resources          ["img"]
  :keep-files         [".git"]
  :disqus?            false
