@@ -37,3 +37,16 @@ print(count)
 ```
 
 And it's that easy! Note that I composed the SQL string using [psycopg2's special tool for that purpose](http://initd.org/psycopg/docs/sql.html#module-psycopg2.sql), mainly because you can only pass values, not table names, with the ordinary [placeholder/string paramaterization functionality](http://initd.org/psycopg/docs/usage.html#passing-parameters-to-sql-queries) and it squicks me out to use basic formatting strings anywhere near SQL.
+
+If you want to make it even easier, you can also do a query right from Pandas and have everything land nice and tidy in a DataFrame, though it requires going through SQLAlchemy first. As follows: 
+
+```python
+
+from sqlalchemy import create_engine
+engine = create_engine(connuri)
+raw_engine = engine.raw_connection()
+my_df = pd.read_sql_query("SELECT * FROM your_table;", raw_engine)
+
+```
+
+and there you go!
